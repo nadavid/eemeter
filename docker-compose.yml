@@ -2,7 +2,7 @@ version: '3'
 services:
   shell:
     build: .
-    image: eemeter_shell
+    image: eemeter_shell_old
     stdin_open: true
     tty: true
     entrypoint: /bin/sh
@@ -11,7 +11,7 @@ services:
       - /app/tests/__pycache__/
 
   docs:
-    image: eemeter_shell
+    image: eemeter_shell_old
     ports:
       - "${HOST_PORT_DOCS:-8000}:8000"
     entrypoint: make -C docs livehtml
@@ -22,7 +22,7 @@ services:
       - shell
 
   test:
-    image: eemeter_shell
+    image: eemeter_shell_old
     entrypoint: py.test -n0
     volumes:
       - .:/app
@@ -31,7 +31,7 @@ services:
       - shell
 
   jupyter:
-    image: eemeter_shell
+    image: eemeter_shell_old
     ports:
       - "${HOST_PORT_JUPYTER:-8888}:${HOST_PORT_JUPYTER:-8888}"
     entrypoint: |
@@ -43,7 +43,7 @@ services:
       - shell
 
   eeweather:
-    image: eemeter_shell
+    image: eemeter_shell_old
     entrypoint: eeweather
     volumes:
     - .:/app
