@@ -50,10 +50,12 @@ def generate_energy_data(start_date,
     df['station_code'] = station_code
     return df
 
+
 def build_model(df):
     cc = CaltrackDailyModel()
     result = cc.fit(df)
     return cc
+
 
 def read_test_data(fname):
     df = pd.read_csv(fname, parse_dates=['date'])
@@ -61,9 +63,8 @@ def read_test_data(fname):
     df = df.sort_values(by='date')
     df_index = df.set_index(pd.DatetimeIndex(df['date']))
     newdf = df_index.asfreq('d', method='pad')
+    newdf.index = pd.to_datetime(newdf.index.tz_localize('UTC'))
     return newdf
-
-
 
 
 if __name__ == '__main__':
