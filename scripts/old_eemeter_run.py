@@ -62,6 +62,7 @@ def read_test_data(fname):
     df = df.sort_values(by='date')
     df_index = df.set_index(pd.DatetimeIndex(df['date']))
     newdf = df_index.asfreq('d', method='pad')
+    newdf.index = pd.to_datetime(newdf.index.tz_localize('UTC'))
     return newdf
 
 
