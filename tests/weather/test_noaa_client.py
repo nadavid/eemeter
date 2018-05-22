@@ -17,3 +17,10 @@ def test_gsod_data():
     assert data.shape == (365,)
     ts = pd.Timestamp('2011-01-01 00:00:00+0000', tz='UTC')
     assert_allclose(data[ts], -6.9444444444444446)
+
+def test_isod_data_fails():
+    client = NOAAClient()
+    data = client.get_isd_data('720406', '2017')
+    assert data.shape == (17520,)
+    assert data.dropna().shape == (3577,)
+
